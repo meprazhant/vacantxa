@@ -12,7 +12,8 @@ export const authOptions = {
     ],
     pages: {
         signIn: '/auth/register',
-    }
+    },
+    secret: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET,
 }
 
 export default NextAuth(authOptions)
