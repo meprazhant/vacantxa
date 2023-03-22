@@ -1365,6 +1365,11 @@ input::-webkit-inner-spin-button {
   overflow-y: scroll;
 }
 
+.rc-noscroll {
+  height: auto;
+  width: 100%;
+}
+
 .rc-body::-webkit-scrollbar {
   width: 5px;
 }
@@ -2726,6 +2731,56 @@ html {
   display: none;
 }
 
+
+
+.homeJob {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 90%;
+  border-radius: 20px;
+  padding: 50px;
+  border: 1px solid var(--gra2);
+}
+
+.homeJob h2 {
+  font-size: 28px;
+}
+
+.Explore {
+  padding-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edituser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  padding: 50px;
+  min-height: 100vh;
+}
+
+.eu-card {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  margin-top: 50px;
+  border-radius: 20px;
+  border: 1px solid var(--gra2);
+}
+
+.rc-asd {
+  display: flex;
+  width: 100%;
+}
+
 @media only screen and (max-width:1200px) {
   .tDash {
     padding-left: 20px;
@@ -3025,25 +3080,13 @@ html {
     gap: 30px;
   }
 
-}
+  .rc-body {
+    width: 100%;
+  }
 
-.homeJob {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 90%;
-  border-radius: 20px;
-  padding: 50px;
-  border: 1px solid var(--gra2);
-}
+  .rc-input,
+  .rq-input {
+    width: 100%;
+  }
 
-.homeJob h2 {
-  font-size: 28px;
-}
-
-.Explore {
-  padding-top: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

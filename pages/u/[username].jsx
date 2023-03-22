@@ -60,7 +60,9 @@ function user() {
                         </div>
                     </div>
                     <div className="ut-btn">
-                        <button >Profile Settings</button>
+                        <button onClick={() => {
+                            router.push("/u/[username]/edit", "/u/" + data._id + "/edit")
+                        }} >Profile Settings</button>
                         <button onClick={() => signOut()}>Sign Out</button>
                     </div>
                 </div>

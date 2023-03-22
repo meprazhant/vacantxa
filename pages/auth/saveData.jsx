@@ -16,6 +16,7 @@ function saveData(ctx) {
     var [data, setData] = useState({})
     var [userData, setUserData] = useState({})
     var router = useRouter()
+    var [loading, setLoading] = useState(true)
 
 
     function savestuff(datx) {
@@ -35,11 +36,14 @@ function saveData(ctx) {
             .then(res => {
                 console.log(res)
                 setUserData(res.data)
-                if (res.data?.phone && res.data?.address) {
-                    router.push("/u/" + res.data?._id)
+                if (ctx.query.type == 'register' && res.data?.phone && res.data?.address) {
+                    router.push("/")
+                    return
                 }
                 if (res.data) {
                     changeText(res?.data)
+                    setLoading(false)
+                    changeQual(res?.data?.qualification)
                 }
             })
             .catch(err => {
@@ -47,6 +51,16 @@ function saveData(ctx) {
             }
             )
     }
+    function changeQual(quals) {
+        var text = document.querySelectorAll(".rq-input input")
+        for (var i = 0; i < text.length; i++) {
+            if (!!quals[text[i].id])
+                text[i].value = quals[text[i]?.id]
+        }
+
+    }
+
+
     function changeText(data) {
 
         var text = document.querySelectorAll(".rc-body input")
@@ -77,6 +91,7 @@ function saveData(ctx) {
                 qualification[0][text[i].id] = text[i].value
             }
         }
+
         fetch("/api/user/step2", {
             method: "POST",
             headers: {
@@ -108,125 +123,132 @@ function saveData(ctx) {
 
     }, [session.status])
 
-    return (
-        <div>
-            <Head>
-                <title>Register | Almost Done</title>
+    if (loading) {
+        return (<>
 
-            </Head>
-            <div className="regData">
-                <div className="regDataCard">
-                    <div className="regDataCardHead">
-                        <div className="rd-step ">
-                            <div className="rd-step-num">
-                                1
-                            </div>
-                            <div className="rd-step-text">
-                                Register
-                            </div>
+        </>
+        )
+    }
+    if (!loading)
+        return (
+            <div>
+                <Head>
+                    <title>Register | Almost Done</title>
 
-                        </div>
-                        <div className="rd-step rd-active">
-                            <div className="rd-step-num">
-                                2
-                            </div>
-                            <div className="rd-step-text">
-                                Add Details
-                            </div>
-
-                        </div>
-                        <div className="rd-step">
-                            <div className="rd-step-num">
-                                3
-                            </div>
-                            <div className="rd-step-text">
-                                Post Job
-                            </div>
-
-                        </div>
-                    </div>
-                    <div className="regDataCardBody">
-                        <div className="rc-head">
-                            <p>Step 2</p>
-                            <h2>Add Details</h2>
-                            <p>Enter the following details and you are done registering</p>
-                        </div>
-                        <div className="rc-body">
-                            <div className="rc-input">
-                                <label htmlFor="name">Name Of Organization </label>
-                                <input type="text" name="name" id="name" />
-                            </div>
-                            <div className="rc-input">
-                                <label htmlFor="email">Email</label>
-                                <input type="email" name="email" id="email" readOnly />
-                            </div>
-                            <div className="rc-input">
-                                <label htmlFor="phone">Phone</label>
-                                <input type="number" name="phone" id="phone" />
-                            </div>
-                            <div className="rc-input">
-                                <label htmlFor="address">Address</label>
-                                <input type="text" name="address" id="address" />
-                            </div>
-
-                            {text == "Teacher" &&
-
-                                <div className="rc-teacher">
-                                    <div className="rc-input">
-                                        <label htmlFor="subject">Subject</label>
-                                        <input type="text" name="subject" id="subject" />
-                                    </div>
-                                    <div className="rc-input">
-                                        <label htmlFor="experience">Experience</label>
-                                        <input type="text" name="experience" id="experience" />
-                                    </div>
-                                    <div className="rc-qs">
-                                        <label htmlFor="qualification">Qualification | Example:(2074BS/Shree Moti High School/English) <span>Add No in empty box</span></label>
-                                        <div className="rc-qualification">
-                                            <div className="rq-input">
-                                                <label htmlFor="SLC / SEE">SLC / SEE</label>
-                                                <input type="text" name="qual" id="SLC" placeholder='2074BS/Shree Moti High School/English' />
-                                            </div>
-                                            <div className="rq-input">
-                                                <label htmlFor="HSEB">HSEB</label>
-                                                <input type="text" name="qual" id="HSEB" placeholder='2076BS/Arniko Intl Academy/Management' />
-                                            </div>
-                                            <div className="rq-input">
-                                                <label htmlFor="Bachelor">Bachelor</label>
-                                                <input type="text" name="qual" id="Bachelor" placeholder='2079BS/Mechi Multiple Campus/BCA' />
-                                            </div>
-                                            <div className="rq-input">
-                                                <label htmlFor="Master">Master</label>
-                                                <input type="text" name="qual" id="Master" placeholder='2083BS/Mechi Multiple Campus/MCA' />
-                                            </div>
-                                            <div className="rq-input">
-                                                <label htmlFor="PhD">PhD</label>
-                                                <input type="text" name="qual" id="PhD" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-
+                </Head>
+                <div className="regData">
+                    <div className="regDataCard">
+                        <div className="regDataCardHead">
+                            <div className="rd-step ">
+                                <div className="rd-step-num">
+                                    1
+                                </div>
+                                <div className="rd-step-text">
+                                    Register
                                 </div>
 
+                            </div>
+                            <div className="rd-step rd-active">
+                                <div className="rd-step-num">
+                                    2
+                                </div>
+                                <div className="rd-step-text">
+                                    Add Details
+                                </div>
 
+                            </div>
+                            <div className="rd-step">
+                                <div className="rd-step-num">
+                                    3
+                                </div>
+                                <div className="rd-step-text">
+                                    Post Job
+                                </div>
 
-
-
-                            }
-
-
-
+                            </div>
                         </div>
-                        <div className="rc-foot">
-                            <button className="rc-foot-btn" onClick={() => changeText(userData)}>Reset</button>
-                            <button className="rc-foot-btn" onClick={save}>Next</button>
+                        <div className="regDataCardBody">
+                            <div className="rc-head">
+                                <p>Step 2</p>
+                                <h2>Add Details</h2>
+                                <p>Enter the following details and you are done registering</p>
+                            </div>
+                            <div className="rc-body">
+                                <div className="rc-input">
+                                    <label htmlFor="name">Name Of {text} </label>
+                                    <input type="text" name="name" id="name" />
+                                </div>
+                                <div className="rc-input">
+                                    <label htmlFor="email">Email</label>
+                                    <input type="email" name="email" id="email" readOnly />
+                                </div>
+                                <div className="rc-input">
+                                    <label htmlFor="phone">Phone</label>
+                                    <input type="number" name="phone" id="phone" />
+                                </div>
+                                <div className="rc-input">
+                                    <label htmlFor="address">Address</label>
+                                    <input type="text" name="address" id="address" />
+                                </div>
+
+                                {text == "Teacher" &&
+
+                                    <div className="rc-teacher">
+                                        <div className="rc-input">
+                                            <label htmlFor="subject">Subject</label>
+                                            <input type="text" name="subject" id="subject" />
+                                        </div>
+                                        <div className="rc-input">
+                                            <label htmlFor="experience">Experience</label>
+                                            <input type="text" name="experience" id="experience" />
+                                        </div>
+                                        <div className="rc-qs">
+                                            <label htmlFor="qualification">Qualification | Example:(2074BS/Shree Moti High School/English) <span>Add No in empty box</span></label>
+                                            <div className="rc-qualification">
+                                                <div className="rq-input">
+                                                    <label htmlFor="SLC / SEE">SLC / SEE</label>
+                                                    <input type="text" name="qual" id="SLC" placeholder='2074BS/Shree Moti High School/English' />
+                                                </div>
+                                                <div className="rq-input">
+                                                    <label htmlFor="HSEB">HSEB</label>
+                                                    <input type="text" name="qual" id="HSEB" placeholder='2076BS/Arniko Intl Academy/Management' />
+                                                </div>
+                                                <div className="rq-input">
+                                                    <label htmlFor="Bachelor">Bachelor</label>
+                                                    <input type="text" name="qual" id="Bachelor" placeholder='2079BS/Mechi Multiple Campus/BCA' />
+                                                </div>
+                                                <div className="rq-input">
+                                                    <label htmlFor="Master">Master</label>
+                                                    <input type="text" name="qual" id="Master" placeholder='2083BS/Mechi Multiple Campus/MCA' />
+                                                </div>
+                                                <div className="rq-input">
+                                                    <label htmlFor="PhD">PhD</label>
+                                                    <input type="text" name="qual" id="PhD" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+
+                                }
+
+
+
+                            </div>
+                            <div className="rc-foot">
+                                <button className="rc-foot-btn" onClick={() => changeText(userData)}>Reset</button>
+                                <button className="rc-foot-btn" onClick={save}>Next</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    )
+        )
 }
 
 export default saveData
