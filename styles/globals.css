@@ -1817,6 +1817,7 @@ input::-webkit-inner-spin-button {
   width: 100%;
   gap: 20px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .cdws-job:hover {
@@ -3034,7 +3035,43 @@ html {
   .jc-btns {
     width: 100%;
 
+
   }
+
+  .pj-left {
+    width: 100%;
+    height: auto;
+    border-right: 0;
+    padding-left: 0;
+    padding: 20px;
+    border-top: 1px solid #b2b2b252;
+    margin-top: 50px;
+  }
+
+  .pj-wrapper {
+    flex-direction: column-reverse;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .pj-right-bottom {
+    height: auto;
+  }
+
+  .pj-right-bottom textarea {
+    width: 100%;
+  }
+
+  .pj-right-bottom p {
+    display: none;
+  }
+
+  .jobPage h2 {
+    font-size: 18px;
+    text-align: center;
+  }
+
 }
 
 
