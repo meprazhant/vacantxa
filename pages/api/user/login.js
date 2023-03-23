@@ -2,6 +2,7 @@ import connectDB from "../../../Database/connect";
 import userSchema from "../../../Database/userSchema";
 
 
+
 export default async function handler(req, res) {
     await connectDB();
     const { data, type, provider } = req.body;
@@ -32,9 +33,11 @@ export default async function handler(req, res) {
         provider
     });
     try {
+        const token = jwt.sign({ token: user._id }, process.env.NEXT_PUBLIC_JWT_SECRET);
+        // your code to set the session token or JWT as a cookie on the response
+        res.setHeader('Set-Cookie', `token=${token}; HttpOnly`);
         await user.save();
         res.status(201).json({ message: "User registered successfully", data: user });
-
     }
     catch (err) {
         console.log(err);

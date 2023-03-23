@@ -6,6 +6,7 @@ import Subject from '../compos/postajob/Subject'
 import Level from '../compos/postajob/Level'
 import Salary from '../compos/postajob/Salary'
 import Description from '../compos/postajob/Description'
+import JobDone from '../compos/postajob/JobDone'
 
 function postjob() {
     var session = useSession()
@@ -59,11 +60,21 @@ function postjob() {
 
     function changeSlide() {
         console.log(number)
-        if (number == 3) {
+        if (number == 4) {
 
         } else {
             setNumber(number + 1)
-            console.log("added", number)
+            router.push({
+                pathname: '/postjob',
+                query: {
+                    subject: router.query.subject,
+                    level: router.query.level,
+                    salary: router.query.salary,
+                    description: router.query.description,
+                    number: number + 1
+                },
+
+            })
         }
 
     }
@@ -126,6 +137,12 @@ function postjob() {
         }
     }
 
+    useEffect(() => {
+        if (router.query.number) {
+            setNumber(parseInt(router.query.number))
+        }
+    }, [router.query.number])
+
     return (
         <div>
             <Head>
@@ -137,6 +154,7 @@ function postjob() {
                     {number == 1 && <Level />}
                     {number == 2 && <Salary />}
                     {number == 3 && <Description />}
+                    {number == 4 && <JobDone />}
 
                     {/* <Subject /> */}
                     {/* <Level /> */}
@@ -146,7 +164,7 @@ function postjob() {
                     <div className="post-btn">
                         {number == 0 ? null : <button onClick={prevSlide}>Previous :{next[number - 1]}</button>}
 
-                        {number == 3 ? <button onClick={postData}>Post</button> : <button onClick={changeSlide}>Next :{next[number + 1]}</button>}
+                        {number == 4 ? <button onClick={postData}>Post</button> : <button onClick={changeSlide}>Next :{next[number + 1]}</button>}
                     </div>
                 </div>
             }

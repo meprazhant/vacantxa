@@ -77,7 +77,6 @@ function Jobcard({ job }) {
         setTime(time)
     }
     function getApplied() {
-        console.log(job)
         if (!job.applies) {
             setApplied(0)
         } else {
@@ -93,6 +92,16 @@ function Jobcard({ job }) {
         router.push(`/applicants/${job._id}`)
     }
 
+    function edit() {
+        router.push({
+            pathname: '/',
+            query: {
+                id: job._id,
+                action: 'edit'
+            }
+        })
+    }
+
     return (
         <div className=' cdws-job'>
             <div className="cdws-job-info">
@@ -100,6 +109,7 @@ function Jobcard({ job }) {
             </div>
             <div className="cdws-job-btn">
                 <button onClick={navigateApply}>{applied} applies for this Job</button>
+                <button onClick={edit}>Edit</button>
             </div>
         </div>
     )

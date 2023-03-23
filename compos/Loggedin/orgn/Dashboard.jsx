@@ -2,6 +2,7 @@ import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useState, useEffect } from 'react'
+import Editjob from './Editjob'
 import Jobcard from './Jobcard'
 
 function Dashboard() {
@@ -71,6 +72,18 @@ function Dashboard() {
         }
     }, [session])
 
+    var [edit, setEdit] = useState(false)
+
+    useEffect(() => {
+        var action = router.query?.action
+        getJobs()
+        if (action == 'edit') {
+            setEdit(true)
+        } else {
+            setEdit(false)
+        }
+    }, [router.query?.action])
+
     return (
         <>
             <Head>
@@ -78,6 +91,9 @@ function Dashboard() {
 
             </Head>
             {!loading && <div className='clientDash'>
+                {(edit) && <div className="clientAbs">
+                    <Editjob />
+                </div>}
                 <div className="cd-top">
                     <h2>Hi, {name} 👋</h2>
                 </div>

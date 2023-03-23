@@ -14,6 +14,7 @@
     "@next/font": "13.1.6",
     "daisyui": "^2.51.4",
     "framer-motion": "^9.0.4",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.2",
     "next": "13.1.6",
     "next-auth": "^4.19.2",
@@ -22,7 +23,8 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
     "tailwind": "^4.0.0",
-    "theme-change": "^2.3.0"
+    "theme-change": "^2.3.0",
+    "use-sse": "^2.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
