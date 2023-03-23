@@ -2039,11 +2039,21 @@ input::-webkit-inner-spin-button {
   width: 100%;
 }
 
+.homeLoad {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh !important;
+  width: 100%;
+}
+
 .mj-loading {
   height: 300px;
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  gap: 20px;
   align-items: center;
 }
 
@@ -2054,7 +2064,34 @@ input::-webkit-inner-spin-button {
   background-color: var(--foreground);
   margin: 0 5px;
   animation: loading 1s infinite;
+}
 
+.mj-loading-text {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  margin: 0;
+  font-size: 15px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.mj-loading-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @keyframes loading {

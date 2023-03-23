@@ -35,7 +35,9 @@ export default function Home() {
         body: JSON.stringify({ email: email })
       }).then(res => res.json()).then(data => {
         setType(data.data.type)
-        setLoading(false)
+        setTimeout(() => {
+          setLoading(false)
+        }, 1000)
         setUser(data.data)
       })
     }
@@ -43,17 +45,14 @@ export default function Home() {
 
   useEffect(() => {
     if (session.status === 'authenticated') {
-      console.log('authenticated')
       setSessionData(session.data?.user)
       getUser(session.data?.user?.email)
       setAuth(true)
-      setLoading(false)
+      // setLoading(false)
     } else if (session.status === 'unauthenticated') {
-      console.log('not authenticated')
       setAuth(false)
       setLoading(false)
     } else {
-      console.log('loading')
 
     }
   }, [session])
@@ -91,6 +90,19 @@ export default function Home() {
             <Footer />
           </>}
       </main>
+      }
+
+      {loading && <div className="mj-loading homeLoad">
+        <div className="mj-loading-dots">
+          <div className="mj-loading-dot"></div>
+          <div className="mj-loading-dot"></div>
+          <div className="mj-loading-dot"></div>
+        </div>
+        <div className="mj-loading-text">
+          <span>Wait a second until we set the homepage for you. </span>
+        </div>
+
+      </div>
       }
     </>
   )
