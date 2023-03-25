@@ -61,8 +61,10 @@ const userSchema = new mongoose.Schema({
     },
     token: {
         type: String,
+    },
+    verified: {
+        type: Boolean,
     }
-
 });
 
 // export schema

@@ -16,10 +16,13 @@ function postjob() {
         "Subject",
         "Level",
         "Salary",
-        "Description"
+        "Description",
+        "Payment",
+        "Finalize"
     ])
 
     var router = useRouter()
+    var [userData, setUserData] = useState({})
 
 
     function getUser(email) {
@@ -33,7 +36,7 @@ function postjob() {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                setUserData(data.data)
                 if (data.data.type == "Teacher") {
                     router.push("/")
                 } else {
@@ -153,7 +156,7 @@ function postjob() {
                     {number == 0 && <Subject />}
                     {number == 1 && <Level />}
                     {number == 2 && <Salary />}
-                    {number == 3 && <Description />}
+                    {number == 3 && <Description data={userData} />}
                     {number == 4 && <JobDone />}
 
                     {/* <Subject /> */}

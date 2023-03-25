@@ -41,9 +41,13 @@ function saveData(ctx) {
                     return
                 }
                 if (res.data) {
-                    changeText(res?.data)
-                    setLoading(false)
-                    changeQual(res?.data?.qualification)
+                    setTimeout(() => {
+                        changeText(res.data)
+                        setLoading(false)
+                    }, 1000);
+                    if (res.data?.qualification?.length > 0) {
+                        changeQual(res?.data?.qualification)
+                    }
                 }
             })
             .catch(err => {
@@ -53,21 +57,24 @@ function saveData(ctx) {
     }
     function changeQual(quals) {
         var text = document.querySelectorAll(".rq-input input")
-        for (var i = 0; i < text.length; i++) {
-            if (!!quals[text[i].id])
-                text[i].value = quals[text[i]?.id]
+        if (quals.length > 0) {
+            for (var i = 0; i < text.length; i++) {
+                if (!!quals[text[i].id])
+                    text[i].value = quals[text[i]?.id]
+            }
         }
-
     }
 
 
     function changeText(data) {
+        setTimeout(() => {
+            var text = document.querySelectorAll(".rc-body input")
 
-        var text = document.querySelectorAll(".rc-body input")
-        for (var i = 0; i < text.length; i++) {
-            if (!!data[text[i].id])
-                text[i].value = data[text[i]?.id]
-        }
+            for (var i = 0; i < text.length; i++) {
+                if (!!data[text[i].id])
+                    text[i].value = data[text[i]?.id]
+            }
+        }, 100);
     }
 
     function save() {

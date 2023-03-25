@@ -9,7 +9,7 @@ import { BiErrorCircle } from 'react-icons/bi'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 
-function Jobcard({ data, from }) {
+function Jobcard({ data, from, isOrgn }) {
     var [view, setView] = useState()
     var session = useSession()
     var router = useRouter()
@@ -207,15 +207,21 @@ function Jobcard({ data, from }) {
                         <img src={org?.image} alt="" referrerPolicy='no-referrer' />
                         <h3>{org?.name}</h3>
                     </div>
-                    {(!from && auth) && <div className="jt-right">
+                    {(!from && auth && !isOrgn) && <div className="jt-right">
                         {(alreadyApplied) ? <button className="applied" onClick={applied} style={{ backgroundColor: "blue !important" }} ><IoMdDoneAll fill='white' /> Applied </button> : <button onClick={apply}>Apply Now</button>}
                         {(alreadySaved) ? <button className="saved" onClick={unsave} style={{ backgroundColor: "red !important" }} ><AiFillHeart fill='red' /> Saved </button> : <button onClick={saveJob}><AiOutlineHeart /> Save </button>}
                     </div>}
+
                     {(!from && !auth) && <div className="jt-right">
                         <button onClick={() => {
                             router.push("/auth/join")
                         }}>Login to Apply</button>
                     </div>}
+                    {(!from && auth && isOrgn) && <div className="jt-right">
+                        <button style={{ backgroundColor: "red" }}>Cannot apply as Organization account</button>
+                    </div>}
+
+
 
                 </div>
                 <div className="jc-top-data">
@@ -264,7 +270,7 @@ function Jobcard({ data, from }) {
                     <h2>On This Job</h2>
                     <div className="jc-activity-item">
                         <p>Total Applied: </p>
-                        <p>{data.applies?.length}</p>
+                        <p>{data.applies?.length || 0}</p>
                     </div>
                     {(loadView) && <div className="jc-activity-item">
                         <p>Total Viewed: </p>

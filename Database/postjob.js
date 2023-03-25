@@ -5,7 +5,10 @@ const postjob = new mongoose.Schema({
         type: String,
         required: true,
     },
-
+    verified: {
+        type: Boolean,
+        default: false,
+    },
     subject: {
         type: String,
         required: true,
@@ -26,13 +29,14 @@ const postjob = new mongoose.Schema({
         userid: {
             type: String,
         },
-        cover: {
-            type: String,
-
-        },
         date: {
             type: Date,
         },
+
+        cover: {
+            type: String,
+        }
+
     }
     ,
     postedOn: {

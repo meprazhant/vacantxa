@@ -1584,7 +1584,7 @@ input::-webkit-inner-spin-button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 40%;
+  width: 60%;
   min-width: 400px;
   max-height: 70vh;
   padding: 20px;
@@ -1632,6 +1632,27 @@ input::-webkit-inner-spin-button {
   gap: 15px;
   padding-bottom: 10px;
   border-bottom: 1px solid var(--gra2);
+}
+
+.jobLoad {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  height: 180px;
+  width: 100%;
+}
+
+.jd-data button {
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  width: 100px;
+  font-size: 20px;
+  color: var(--card-color);
+  font-weight: 500;
 }
 
 .jd-data h1 {
@@ -2490,6 +2511,141 @@ input::-webkit-inner-spin-button {
   font-size: 25px;
 }
 
+.paymentcard {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  gap: 20px;
+  width: 100%;
+}
+
+.pc-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 50px;
+  background-color: var(--gra4);
+}
+
+.pc-plans {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-top: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.pdes-card {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.pc-desc {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pcard-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 20px;
+}
+
+.pc-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+}
+
+.pc-money {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pc-money h2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 800;
+  margin: 0;
+  font-size: 25px;
+}
+
+.pc-money p {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  margin: 0;
+  font-size: 10px;
+  opacity: .8;
+}
+
+.pcard-header h2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 800;
+  margin: 0;
+  font-size: 32px;
+}
+
+.pcard-header p {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  margin: 0;
+  font-size: 10px;
+  opacity: .5;
+}
+
+
+.pdes-card svg {
+  font-size: 15px !important;
+  min-height: 15px;
+  min-width: 15px;
+}
+
+.pdes-inactive {
+  opacity: 0.4;
+}
+
+.pdes-card p {
+  margin: 0;
+  font-family: 'roboto', sans-serif;
+}
+
+.planCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 380px;
+  min-width: 220px;
+  gap: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  transition: ease-in-out 0.3s;
+  width: calc(95% / 3);
+  background-color: transparent;
+  border: 1px solid var(--landing-button);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.planCard:hover {
+  background-color: var(--landing-button);
+  color: white;
+  border: 1px solid var(--landing-button);
+  transform: scale(1.05);
+}
+
 .jobCard {
   display: flex;
   flex-direction: column;
@@ -2789,6 +2945,26 @@ html {
   background-color: var(--atribute-color);
   color: var(--gra2);
 }
+
+.nomoney {
+  background-image: url('https://th.bing.com/th/id/R.e6c9645b8a8bc11eeb211a037200cdea?rik=8knNnDAfnNrnkg&riu=http%3a%2f%2fwww.clipartbest.com%2fcliparts%2fbTy%2fLoE%2fbTyLoEoLc.png&ehk=Zxs6lyKlb%2bSNKSreQIGMwrp9gXAGEfuxd9woNM%2b2A2U%3d&risl=&pid=ImgRaw&r=0');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100px;
+  width: 100%;
+}
+
+.jc-nomoney h2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  padding: 18px;
+  text-align: center;
+  color: var(--foreground);
+}
+
+
 
 .applied {
   display: flex;

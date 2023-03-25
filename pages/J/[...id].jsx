@@ -11,12 +11,46 @@ function Jobpage() {
     var session = useSession()
     var [id, setId] = useState("random")
     var [loaded, setLoaded] = useState(false)
+    var [loaded2, setLoaded2] = useState(false)
     var [jobData, setJobdata] = useState({})
+    var [accountType, setAccountType] = useState("")
     var [showApply, setShowApply] = useState(false)
+
+    var [isOrgn, setIsOrgn] = useState()
+
+
+    function getUser() {
+        fetch(`/api/user/getUser`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: session.data?.user.email }),
+
+        })
+            .then(res => res.json())
+            .then(data => {
+                setLoaded2(true)
+                if (data?.data) {
+                    if (data.data.type == "Teacher") {
+                        setIsOrgn(false)
+                    } else {
+                        setIsOrgn(true)
+                    }
+
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            }
+            )
+
+    }
     useEffect(() => {
         if (!!router.query.id) {
             setId(router.query.id[0])
             getJob(router.query.id[0])
+            getUser()
         }
         if (router.query?.action == 'apply') {
             setShowApply(true)
@@ -26,6 +60,7 @@ function Jobpage() {
         } else {
             setShowApply(false)
         }
+
     }, [router.query])
     var [authe, setAuthe] = useState(false)
 
@@ -48,7 +83,7 @@ function Jobpage() {
         router.push("/")
     }
 
-    if (!loaded) {
+    if (!loaded && !loaded2) {
         return null
     }
 
@@ -60,16 +95,15 @@ function Jobpage() {
                 <title>Job Page | {jobData.desc}</title>
 
             </Head>
-            {(loaded) && <div className='jobPage'>
+            {(loaded && loaded2) && <div className='jobPage'>
                 <div className="jd-dets" >
                     <div onClick={goback} className="jd-back"><MdArrowBack /></div>
                     <h2>Job Detail</h2>
                 </div>
-
-                <Jobcard data={jobData} />
-
+                <Jobcard data={jobData} isOrgn={isOrgn} />
                 {showApply && <JobApply data={jobData} />}
             </div>}
+
         </>
     )
 }

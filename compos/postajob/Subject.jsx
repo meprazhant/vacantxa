@@ -48,7 +48,7 @@ function Subject() {
                 </div>
                 <div className="pj-right-bottom pjrb">
                     <div className="pjrb-subject">
-                        <select name="subject" id="subject" onChange={(e) => change(e.target.value)}>
+                        <select name="subject" id="subject" defaultValue={"english"} onChange={(e) => change(e.target.value)}>
                             <option value="english">English</option>
                             <option value="nepali">Nepali</option>
                             <option value="math">C. Math</option>

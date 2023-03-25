@@ -44,11 +44,15 @@ function Edituser() {
         for (var i = 0; i < text.length; i++) {
             if (!!data[text[i].id])
                 text[i].value = data[text[i]?.id]
+
         }
-        for (var i = 0; i < req.length; i++) {
-            if (!!data?.qualification[req[i].id])
-                req[i].value = data?.qualification[req[i]?.id]
+        if (data?.qualification) {
+            for (var i = 0; i < req.length; i++) {
+                if (!!data?.qualification[req[i].id])
+                    req[i].value = data?.qualification[req[i]?.id]
+            }
         }
+        console.log(data?.qualification)
     }
 
 

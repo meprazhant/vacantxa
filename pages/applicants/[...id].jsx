@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import Jobcard from '../../compos/Jobs/Jobcard'
 import Head from 'next/head'
 import Applied from '../../compos/Jobs/Applied'
+import Payment from '../../compos/Jobs/Payment'
 
 function Applicants() {
     var session = useSession()
@@ -47,6 +48,15 @@ function Applicants() {
             }
             )
         }
+        else if (router.query.view == 'payment') {
+            setView('Payment')
+            var apm = document.querySelectorAll('.applicantMenu .applicantMenu__item')
+            apm.forEach((e) => {
+                e.classList.remove('am-active')
+                apm[2].classList.add('am-active')
+            }
+            )
+        }
     }, [router.query.view])
 
 
@@ -62,6 +72,7 @@ function Applicants() {
     }
 
     function navigate(e) {
+        setLoading(true)
         var apm = document.querySelectorAll('.applicantMenu .applicantMenu__item')
         apm.forEach((e) => {
             e.classList.remove('am-active')
@@ -81,6 +92,12 @@ function Applicants() {
                 query: { view: 'applicants' },
             })
         }
+        else if (e.target.innerHTML == 'Payment') {
+            router.push({
+                pathname: '/applicants/' + id,
+                query: { view: 'payment' },
+            })
+        }
     }
 
 
@@ -97,10 +114,23 @@ function Applicants() {
                 <div onClick={(e) => navigate(e)} className="applicantMenu__item">
                     Applicants
                 </div>
+                <div onClick={(e) => navigate(e)} className="applicantMenu__item">
+                    Payment
+                </div>
             </div>
+
+            {loading && <div className="jobLoad">
+                <div className="mj-loading-dot"></div>
+                <div className="mj-loading-dot"></div>
+                <div className="mj-loading-dot"></div>
+                <div className="mj-loading-dot"></div>
+            </div>
+            }
 
             {(!loading && view == 'Job') && <Jobcard data={job} from={"1"} />}
             {(!loading && view == 'Applicants') && <Applied data={job.applies} job={job} />}
+            {(!loading && view == 'Payment') && <Payment data={job.applies} job={job} />}
+
         </div >
     )
 }
