@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Verifying from './Verifying'
+import { useRouter } from 'next/router'
 
 function Onetime({ id, frm }) {
+    var router = useRouter()
     var [code, setCode] = useState('')
     function fetcc() {
         fetch('/api/job/getjob?id=' + id)
@@ -35,6 +38,16 @@ function Onetime({ id, frm }) {
         }
     }, [frm])
 
+    function doneClick() {
+        // fetch("/api/sendmail/send?code=" + code)
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         console.log(data)
+        //     }
+        //     )
+
+        router.push('/payment/' + frm + '/' + id + '?status=done')
+    }
 
     useEffect(() => {
         fetcc()
@@ -42,6 +55,7 @@ function Onetime({ id, frm }) {
     }, [])
     return (
         <div className='onetime'>
+            <Verifying />
             <h2>You are about to purchase {frm} plan for <Link href={'/applicants/' + id}>this</Link> job.</h2>
             <div className="buyStuff">
                 <div className="bs-left">
@@ -55,7 +69,7 @@ function Onetime({ id, frm }) {
                         <li>After the payment is verified, you will be redirected to the job page.</li>
                     </ul>
                     <div className="payBtn">
-                        <button>Payment Done</button>
+                        <button onClick={doneClick}>Verify The Payment</button>
                     </div>
                 </div>
                 <div className="bs-right">
