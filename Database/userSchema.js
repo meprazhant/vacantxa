@@ -22,6 +22,7 @@ const userSchema = new mongoose.Schema({
     phone: {
         type: Number,
         // required: true,
+        default: 0,
     },
     address: {
         type: String,
@@ -38,6 +39,7 @@ const userSchema = new mongoose.Schema({
     subject: {
         type: String,
         // required: true,
+        default: "N/A",
     },
     experience: {
         type: String,

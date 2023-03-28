@@ -5,6 +5,10 @@ const postjob = new mongoose.Schema({
         type: String,
         required: true,
     },
+    code: {
+        type: String,
+
+    },
     verified: {
         type: Boolean,
         default: false,

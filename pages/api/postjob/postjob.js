@@ -9,6 +9,25 @@ export default async function handler(req, res) {
     await connectDB();
     const { email } = data;
 
+    // make a random code
+
+    function makeid(length) {
+        let result = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        const charactersLength = characters.length;
+        let counter = 0;
+        while (counter < length) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            counter += 1;
+        }
+        return result;
+    }
+
+    var code = makeid(6);
+
+
+
+
     var session = await getSession({ req });
 
     if (!session) {
@@ -38,7 +57,8 @@ export default async function handler(req, res) {
                                     level: data.level,
                                     orgnData: user,
                                     applied: data.applied,
-                                    postedOn: data.postedOn
+                                    postedOn: data.postedOn,
+                                    code: code
                                 });
                                 postjob.save();
                                 if (postjob) {

@@ -3190,6 +3190,16 @@ html {
   background-repeat: no-repeat;
 }
 
+.fouroload {
+  background-image: url('https://i.pinimg.com/originals/5e/4a/ed/5e4aed652df92c7daef07bd48b56cb11.jpg');
+  background-size: contain;
+  background-position: center;
+  height: 80px;
+  width: 100%;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+}
+
 .res_nojob {
   padding: 20px;
   border: 1px solid var(--gra2);
@@ -3631,4 +3641,107 @@ html {
   display: flex;
   gap: 10px;
   align-items: center;
+}
+
+.Paymentstuffs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+}
+
+
+.onetime {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 580px;
+  padding: 20px;
+  width: 70vw;
+  border-radius: 10px;
+  border: 1px solid #b2b2b252;
+}
+
+.onetime h2 {
+  margin: 0;
+  font-family: 'roboto', sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+}
+
+.payplans {
+  width: 80%;
+}
+
+.buyStuff {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  align-items: start;
+}
+
+.bs-right {
+  width: 30%;
+}
+
+.bs-right img {
+  width: 100%;
+}
+
+
+.buyStuff ul li {
+  padding-bottom: 5px;
+  font-family: 'tobermory', sans-serif;
+  list-style: "✔";
+  padding-left: 20px;
+  margin: 0;
+  /* animation: liAnim 0.5s ease-in-out; */
+  opacity: 0;
+}
+
+@keyframes liAnim {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.msg {
+  color: #ff0000;
+}
+
+.payBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  color: #fff;
+  font-family: 'roboto', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  transition: 0.3s ease-in-out;
+}
+
+.payBtn button {
+  padding: 10px;
+  border-radius: 5px;
+  font-family: 'roboto', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  border: 1px solid #b2b2b252;
+}
+
+.payBtn button:hover {
+  background-color: #b2b2b252;
 }

@@ -46,9 +46,10 @@ function Applied({ data, job, id }) {
     if (loading) {
         return (<div className='Applied'>
             <div className="jc-zero">
-                <div className="fourofour">
+                <div className="fouroload">
 
                 </div>
+
                 <h2>Loading...</h2>
             </div>
         </div>

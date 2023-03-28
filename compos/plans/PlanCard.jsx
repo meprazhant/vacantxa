@@ -1,7 +1,8 @@
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { BsCheckCircle, BsCheckCircleFill } from 'react-icons/bs'
 
-function PlanCard({ time }) {
+function PlanCard({ time, nodir, id }) {
     time = time - 1
     var data = [
         {
@@ -44,8 +45,31 @@ function PlanCard({ time }) {
         setJobData(data[time])
     }, [time])
 
+    var router = useRouter()
+
+    function gotoplan() {
+        if (!nodir) {
+            if (jobData?.header == 'One Time') {
+                router.push('/payment/onetime/' + router.query.id[0])
+            } else if (jobData?.header == 'Monthly') {
+                router.push('/payment/monthly/' + router.query.id[0])
+            } else if (jobData?.header == 'Yearly') {
+                router.push('/payment/yearly/' + router.query.id[0])
+            }
+        } else {
+            if (jobData?.header == 'One Time') {
+                router.push('/payment/onetime/' + id)
+            } else if (jobData?.header == 'Monthly') {
+                router.push('/payment/monthly/' + id)
+            } else if (jobData?.header == 'Yearly') {
+                router.push('/payment/yearly/' + id)
+            }
+
+        }
+    }
+
     return (
-        <div className='planCard'>
+        <div className='planCard' onClick={gotoplan}>
             <div className="pcard-header">
                 <h2>{jobData?.header}</h2>
                 <p>{jobData?.desc}</p>
